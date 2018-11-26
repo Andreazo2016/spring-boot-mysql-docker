@@ -1,0 +1,25 @@
+version: '2'
+services:
+  web:
+      build: .
+      ports:
+        - '8080:8080'
+      depends_on:
+        - mysql
+      networks:
+        - mt-network
+  mysql:
+      image: mysql:5.7
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=api_aluga_app
+      ports:
+        - '3306:3306'
+      networks:
+        - mt-network
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  mt-network:
+    driver: bridge
